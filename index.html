@@ -1,0 +1,593 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Luka Uzelac">
+<title>Luka Uzelac Engineering Portfolio</title>
+<meta name="description" content="Selected aerospace engineering projects by Luka Uzelac, RMIT University.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Saira+Semi+Condensed:wght@500;600;700&family=Public+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one engineering "sheet" per project, each opened by a drawing-style title block; summary header, then sheets in order of relevance. */
+:root{
+  --paper:#f4f5f2;      /* sheet ground, faint primer-green bias */
+  --panel:#ffffff;      /* title blocks and figures */
+  --ink:#16202a;        /* text */
+  --ink-2:#4a5560;      /* secondary text */
+  --rule:#cfd4cc;       /* hairlines */
+  --primer:#6f7d1c;     /* zinc-chromate primer accent */
+  --primer-soft:#e6ebc9;
+  --steel:#2f5f86;      /* data accent */
+  --fail:#b0452e;       /* negative margin */
+  --font-display:"Saira Semi Condensed","Arial Narrow",system-ui,sans-serif;
+  --font-body:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --font-mono:"IBM Plex Mono",ui-monospace,"Cascadia Mono",Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#11161a;--panel:#192026;--ink:#e5e9e2;--ink-2:#a3adb3;--rule:#2d363d;
+  --primer:#c3d15a;--primer-soft:#2a3117;--steel:#7fb0d6;--fail:#e07a5f;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#11161a;--panel:#192026;--ink:#e5e9e2;--ink-2:#a3adb3;--rule:#2d363d;
+  --primer:#c3d15a;--primer-soft:#2a3117;--steel:#7fb0d6;--fail:#e07a5f;color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font:400 1rem/1.62 var(--font-body);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 48px}
+.wrap{max-width:1040px;margin:0 auto}
+h1,h2,h3{font-family:var(--font-display);text-wrap:balance;margin:0;letter-spacing:.01em}
+p{margin:0}
+a{color:var(--steel)}
+:focus-visible{outline:2px solid var(--primer);outline-offset:3px}
+.mono{font-family:var(--font-mono);font-size:.78rem;letter-spacing:.02em}
+.eyebrow{font-family:var(--font-mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.12em;color:var(--ink-2)}
+
+/* header */
+header.top{padding-block:44px 28px;border-bottom:2px solid var(--ink);display:grid;gap:22px}
+.id{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:18px}
+h1{font-size:clamp(2.6rem,7vw,4.4rem);font-weight:700;line-height:.95;text-transform:uppercase}
+h1 span{display:block;font-size:.38em;font-weight:600;letter-spacing:.06em;color:var(--primer);margin-top:10px;text-transform:none}
+.contact{display:grid;gap:4px;text-align:right}
+.contact .mono{color:var(--ink-2)}
+.lede{max-width:66ch;font-size:1.08rem}
+.facts{display:flex;flex-wrap:wrap;gap:8px 22px}
+.facts div{display:grid;gap:2px}
+.facts b{font-weight:600}
+
+/* index */
+nav.index{padding-block:26px 8px}
+nav.index ol{list-style:none;margin:12px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule)}
+nav.index li{background:var(--panel)}
+nav.index a{display:grid;gap:6px;padding:14px 16px;text-decoration:none;color:var(--ink);height:100%}
+nav.index a:hover{background:var(--primer-soft)}
+nav.index .t{font-family:var(--font-display);font-weight:600;font-size:1.15rem;line-height:1.15}
+nav.index .s{font-size:.82rem;color:var(--ink-2)}
+
+/* sheet */
+section.sheet{margin-top:56px;display:grid;gap:22px}
+.titleblock{display:grid;grid-template-columns:auto 1fr;border:1.5px solid var(--ink);background:var(--panel)}
+.tb-no{display:grid;place-items:center;padding:12px 18px;border-right:1.5px solid var(--ink);font-family:var(--font-mono);text-align:center}
+.tb-no b{font-family:var(--font-display);font-size:2rem;line-height:1;font-weight:700}
+.tb-main{display:grid;min-width:0}
+.tb-main h2{font-size:clamp(1.5rem,3.4vw,2.1rem);font-weight:700;line-height:1.1;padding:14px 18px 12px;border-bottom:1px solid var(--rule)}
+.tb-cells{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}
+.tb-cells div{padding:8px 18px 10px;border-right:1px solid var(--rule);display:grid;gap:1px;min-width:0}
+.tb-cells div:last-child{border-right:0}
+.tb-cells .k{font-family:var(--font-mono);font-size:.66rem;text-transform:uppercase;letter-spacing:.12em;color:var(--ink-2)}
+.tb-cells .v{font-size:.9rem;font-weight:500}
+
+.brief{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:28px;align-items:start}
+.brief p{max-width:62ch}
+.brief .q{font-size:1.05rem}
+table.spec{width:100%;border-collapse:collapse;font-size:.88rem;font-variant-numeric:tabular-nums}
+table.spec caption{text-align:left;padding-bottom:6px}
+table.spec th,table.spec td{padding:7px 8px;border-bottom:1px solid var(--rule);text-align:left;vertical-align:top}
+table.spec th{font-family:var(--font-mono);font-weight:500;font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-2)}
+table.spec td.n{font-family:var(--font-mono);font-size:.82rem;white-space:nowrap}
+table.spec .ok{color:var(--primer);font-weight:600}
+table.spec .bad{color:var(--fail);font-weight:600}
+
+figure{margin:0;display:grid;gap:8px;min-width:0}
+figure img{display:block;width:100%;height:auto;border:1px solid var(--rule);background:#fff}
+figcaption{font-size:.8rem;color:var(--ink-2);line-height:1.45}
+figcaption b{color:var(--ink);font-weight:600}
+.figs{display:grid;gap:18px}
+.figs.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.figs.hero{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr)}
+.figs.hero .stack{display:grid;gap:18px;align-content:start}
+.figs.narrow-left{grid-template-columns:minmax(0,.42fr) minmax(0,1fr)}
+
+.write{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;border-top:1px solid var(--rule);padding-top:18px}
+.write h3{font-size:1.05rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px;color:var(--primer)}
+.write p{max-width:62ch}
+.tools{display:flex;flex-wrap:wrap;gap:6px}
+.tools span{font-family:var(--font-mono);font-size:.72rem;padding:3px 8px;border:1px solid var(--rule);background:var(--panel);color:var(--ink-2)}
+
+/* wing box drawings */
+.drawing{background:var(--panel);border:1px solid var(--rule);padding:14px 16px;display:grid;gap:12px}
+.drawing .pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.wb-svg,.ms-svg{width:100%;height:auto;display:block}
+.wb-svg .p-skin,.wb-svg .p-web{stroke:var(--ink-2);fill:none;stroke-linecap:round}
+.wb-svg .p-up{stroke:var(--steel)}
+.wb-svg .b-cap{fill:var(--ink)}
+.wb-svg .b-str{fill:var(--ink-2)}
+.wb-svg .b-new{fill:var(--primer)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.76rem;color:var(--ink-2)}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:-1px}
+.ms-svg .grid{stroke:var(--rule);stroke-width:1}
+.ms-svg .grid0{stroke:var(--ink);stroke-width:1.5}
+.ms-svg .tick{fill:var(--ink-2);font:400 11px var(--font-mono)}
+.ms-svg .lab{fill:var(--ink);font:500 13px var(--font-body)}
+.ms-svg .val{fill:var(--ink);font:500 11px var(--font-mono)}
+.ms-svg .bar-base{fill:var(--rule)}
+.ms-svg .bar-new{fill:var(--primer)}
+.ms-svg .bar-fail{fill:var(--fail)}
+.lp-svg{width:100%;max-width:640px;height:auto;display:block}
+.lp-svg .grid{stroke:var(--rule);stroke-width:1}
+.lp-svg .grid0{stroke:var(--ink);stroke-width:1.5}
+.lp-svg .tick{fill:var(--ink-2);font:400 11px var(--font-mono)}
+.lp-svg .lab{fill:var(--ink-2);font:500 12px var(--font-body)}
+.lp-svg .val{fill:var(--ink);font:500 11px var(--font-mono)}
+.lp-svg .curve{fill:none;stroke:var(--primer);stroke-width:2.5;stroke-linejoin:round}
+.lp-svg .pred{stroke:var(--steel);stroke-width:1.5;stroke-dasharray:6 5}
+.lp-svg .peak{fill:var(--primer)}
+
+footer{margin-top:64px;border-top:2px solid var(--ink);padding-top:18px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:14px;color:var(--ink-2);font-size:.9rem}
+
+@media (max-width:760px){
+  .brief,.write,.figs.two,.figs.hero,.figs.narrow-left,.drawing .pair{grid-template-columns:minmax(0,1fr)}
+  .contact{text-align:left}
+  .tb-cells div{border-right:0;border-bottom:1px solid var(--rule)}
+}
+@media print{
+  body{padding-block:0}
+  section.sheet{break-before:page;margin-top:0}
+  section.sheet::before{content:"Luka Uzelac  ·  Aerospace engineering portfolio  ·  lukabrankouzelac@gmail.com";display:block;font:500 9pt var(--font-mono);color:var(--ink-2);border-bottom:1px solid var(--rule);padding-bottom:6px}
+  body{background:#fff}
+  section.sheet:first-of-type{break-before:auto;margin-top:24px}
+  header.top{padding-block:12px 18px}
+  section.sheet{gap:14px}
+  figure img{max-height:340px;object-fit:contain}
+  .figs.hero .stack img{max-height:190px}
+  .write p{font-size:.95rem;line-height:1.5}
+  footer{display:none}
+  .figs.hero > figure img{max-height:260px}
+  .lede{display:none}
+  .tools{display:none}
+  nav.index{display:none}
+  figure,table,.drawing{break-inside:avoid}
+  #wbtest .figs.test{grid-template-columns:repeat(3,minmax(0,1fr))}
+  #wbtest .figs.test .stack{display:contents}
+  #wbtest .figs.test img{height:170px;max-height:none;object-fit:cover}
+  #wbtest .figs.test > figure img{object-position:50% 22%}
+  #wbtest .figs.test figcaption{font-size:.72rem}
+  .ms-svg{width:58%}
+  .lp-svg{width:70%}
+  .drawing{padding:10px 14px;gap:8px}
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+<header class="top">
+  <div class="id">
+    <h1>Luka Uzelac<span>Aerospace engineering portfolio</span></h1>
+    <div class="contact">
+      <span class="mono">lukabrankouzelac@gmail.com</span>
+      <span class="mono">Melbourne, Australia</span>
+      <span class="mono">U.S. citizen (dual U.S.-Australian)</span>
+    </div>
+  </div>
+  <p class="lede">Fourth-year student in the Bachelor of Engineering (Aerospace Engineering) (Honours) / Bachelor of Business at RMIT University. My interests are aerodynamics, flight test and systems engineering. The five projects below show my own contribution to each, with group work marked as such.</p>
+  <div class="facts">
+    <div><span class="eyebrow">Graduating</span><b>November 2027</b></div>
+    <div><span class="eyebrow">Business major</span><b>Strategy and Innovation</b></div>
+    <div><span class="eyebrow">Tools</span><b>ANSYS Workbench · SOLIDWORKS · MATLAB · XFOIL · Excel</b></div>
+  </div>
+</header>
+
+<nav class="index" aria-label="Projects">
+  <span class="eyebrow">Selected projects</span>
+  <ol>
+    <li><a href="#mav"><span class="mono">Sheet 1</span><span class="t">Micro air vehicle: design, build, fly</span><span class="s">Flight test · Systems engineering · Team lead</span></a></li>
+    <li><a href="#wingbox"><span class="mono">Sheet 2</span><span class="t">Stiffened wing box design study</span><span class="s">Aerostructures · Buckling · Individual</span></a></li>
+    <li><a href="#wbtest"><span class="mono">Sheet 3</span><span class="t">Aluminium wing box: build and test to failure</span><span class="s">Fabrication · Testing · Team of four</span></a></li>
+    <li><a href="#rib"><span class="mono">Sheet 4</span><span class="t">Wing rib finite element design</span><span class="s">ANSYS · Plane stress · Mesh study</span></a></li>
+    <li><a href="#schlieren"><span class="mono">Sheet 5</span><span class="t">Supersonic schlieren visualisation</span><span class="s">Compressible flow · Wind tunnel</span></a></li>
+  </ol>
+</nav>
+
+<!-- SHEET 1 -->
+<section class="sheet" id="mav">
+  <div class="titleblock">
+    <div class="tb-no"><span class="mono">Sheet</span><b>1</b><span class="mono">of 5</span></div>
+    <div class="tb-main">
+      <h2>Micro air vehicle: design, build, fly</h2>
+      <div class="tb-cells">
+        <div><span class="k">Course</span><span class="v">AERO2355 Systems Engineering</span></div>
+        <div><span class="k">Date</span><span class="v">Semester 2, 2024</span></div>
+        <div><span class="k">Team</span><span class="v">Six students</span></div>
+        <div><span class="k">My role</span><span class="v">Group manager, assembly lead, payload drop</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="brief">
+    <p class="q">Design, build and fly a remotely piloted aircraft that taxis, takes off, flies a set course through a 1 m × 1 m gate, drops a payload on command and lands. Every requirement had to be written into a verification plan and proven by test.</p>
+    <table class="spec">
+      <caption class="eyebrow">Requirements I verified</caption>
+      <thead><tr><th>Requirement</th><th>Test</th><th>Result</th></tr></thead>
+      <tbody>
+        <tr><td>Drop the 19 g payload (40 × 30 × 19 mm) on command</td><td class="n">≤ 0.5 s</td><td class="ok">Passed, 10/10 in final flight</td></tr>
+        <tr><td>CG ahead of the AC, unchanged with payload</td><td class="n">Balance</td><td class="ok">Passed</td></tr>
+        <tr><td>Control surfaces and motor respond to pilot</td><td class="n">Interface</td><td class="ok">Passed</td></tr>
+        <tr><td>Taxi along a straight line</td><td class="n">Ground</td><td class="ok">Passed after gear rework</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="figs hero">
+    <figure>
+      <img src="img/mav-hero.jpg" alt="The finished micro air vehicle on a sports-hall floor: carbon fibre wing, rod fuselage, three-wheel gear and white tail surfaces." width="1018" height="712">
+      <figcaption><b>Final aircraft before the flight demonstration.</b> 0.84 m span carbon fibre wing on a modular rod fuselage, with wing fences added on the day for lateral stability.</figcaption>
+    </figure>
+    <div class="stack">
+      <figure>
+        <img src="img/mav-payload.jpg" alt="Side view drawing of the payload release: servo near the motor mount, wire through two clips, payload hung below at the centre of gravity, with dimensions 95, 112.5, 132.5 and 152.5 mm." width="1061" height="592">
+        <figcaption><b>My payload release layout.</b> The servo sits close to the motor mount to move the CG forward, with the payload hung at the CG.</figcaption>
+      </figure>
+      <figure>
+        <img src="img/mav-layout.jpg" alt="Annotated photo of the assembly layout: ESC and battery, motor mount, payload release servo, forward gear rail and empennage clip." width="964" height="421">
+        <figcaption><b>Assembly layout.</b> Each subsystem clips onto the fuselage rods, so the CG could be tuned by moving the battery and servos.</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <div class="write">
+    <div>
+      <h3>My role</h3>
+      <p>I was the group manager for a team of six. I allocated tasks, set the topic for each meeting and held the team to the deadlines in our Gantt charts from the PDR to the final report. I also led final assembly and owned the payload drop mechanism, along with its interface and ground tests. The first release ran fishing line from the servo, and its slack made the drop unreliable, so I replaced it with an aluminium wire bent directly into the servo. This removed a part and followed DFMA principles. During interface testing, the bare elastic band holding the payload gripped the release wire. Having tied back my own long hair for years, I swapped it for a fabric-covered hair tie, which held the same tension without the friction. When a payload clip was lost before the final flight, the payload was moved under the remaining clip at the centre of gravity, and the CG test was repeated to confirm it had not moved.</p>
+    </div>
+    <div>
+      <h3>What I learnt</h3>
+      <p>The drop mechanism was the simplest subsystem on the aircraft, yet it changed three times. Each change came from testing rather than from the original drawing. An interface that works on the bench can still fail once it is on the aircraft, so verification has to be repeated whenever the configuration changes. Keeping six people to one timeline was also challenging. The Gantt charts were what kept every milestone visible to the whole group. Overall, this was the first project where I saw the systems engineering V followed through, with requirements set from the top down and verified from the bottom up.</p>
+    </div>
+  </div>
+  <div class="tools"><span>Requirements verification</span><span>Gantt scheduling</span><span>DFMA</span><span>Interface testing</span><span>Ground testing</span></div>
+</section>
+
+<!-- SHEET 2 -->
+<section class="sheet" id="wingbox">
+  <div class="titleblock">
+    <div class="tb-no"><span class="mono">Sheet</span><b>2</b><span class="mono">of 5</span></div>
+    <div class="tb-main">
+      <h2>Stiffened wing box design study</h2>
+      <div class="tb-cells">
+        <div><span class="k">Course</span><span class="v">AERO3350 Aerospace Structures</span></div>
+        <div><span class="k">Date</span><span class="v">Semester 1, 2026</span></div>
+        <div><span class="k">Team</span><span class="v">Individual</span></div>
+        <div><span class="k">Material</span><span class="v">Aluminium, E = 74 GPa</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="brief">
+    <p class="q">Analyse a single-cell stiffened wing box under 20 kN·m bending, 28 kN shear and 5 kN·m torsion, then redesign it from a fixed catalogue of skin gauges, stringers and spar caps so that every margin of safety is positive, with the outer geometry unchanged.</p>
+    <table class="spec">
+      <caption class="eyebrow">Baseline against redesign</caption>
+      <thead><tr><th>Quantity</th><th>Baseline</th><th>Redesign</th></tr></thead>
+      <tbody>
+        <tr><td>Structural mass</td><td class="n">8.98 kg</td><td class="n ok">5.90 kg (−34 %)</td></tr>
+        <tr><td>MS, bending</td><td class="n">+1.30</td><td class="n">+0.62</td></tr>
+        <tr><td>MS, shear</td><td class="n">+0.31</td><td class="n">+0.16</td></tr>
+        <tr><td>MS, upper-skin buckling</td><td class="n bad">−0.88</td><td class="n ok">+0.15</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+
+  <div class="drawing">
+    <span class="eyebrow">Cross-sections to scale (Wing Bay E). Boom size shows area, line weight shows skin gauge.</span>
+    <div class="pair">
+      <figure><svg viewBox="0 0 574 246" role="img" aria-label="Baseline wing box section, six stiffeners, all panels 1.6 mm" class="wb-svg">
+<line x1="34.0" y1="26.0" x2="394.1" y2="26.0" class="p-skin" stroke-width="3.52"/>
+<line x1="394.1" y1="26.0" x2="540.4" y2="26.0" class="p-skin" stroke-width="3.52"/>
+<line x1="540.4" y1="26.0" x2="540.4" y2="206.1" class="p-web" stroke-width="3.52"/>
+<line x1="540.4" y1="206.1" x2="394.1" y2="127.3" class="p-skin" stroke-width="3.52"/>
+<line x1="394.1" y1="127.3" x2="34.0" y2="127.3" class="p-skin" stroke-width="3.52"/>
+<line x1="34.0" y1="127.3" x2="34.0" y2="26.0" class="p-web" stroke-width="3.52"/>
+<circle cx="34.0" cy="26.0" r="4.9" class="b-str"/>
+<circle cx="394.1" cy="26.0" r="10.8" class="b-cap"/>
+<circle cx="540.4" cy="26.0" r="4.9" class="b-str"/>
+<circle cx="34.0" cy="127.3" r="4.9" class="b-str"/>
+<circle cx="394.1" cy="127.3" r="10.8" class="b-cap"/>
+<circle cx="540.4" cy="206.1" r="4.9" class="b-str"/>
+</svg><figcaption><b>Baseline.</b> Six stiffeners, 2200 mm² spar caps, 1.6 mm skins. The 288 mm upper panel buckles first.</figcaption></figure>
+      <figure><svg viewBox="0 0 574 246" role="img" aria-label="Redesigned wing box section, twelve booms in vertically aligned pairs" class="wb-svg">
+<line x1="34.0" y1="26.0" x2="540.4" y2="26.0" class="p-skin p-up" stroke-width="4.40"/>
+<line x1="540.4" y1="26.0" x2="540.4" y2="206.1" class="p-web" stroke-width="3.52"/>
+<line x1="540.4" y1="206.1" x2="394.1" y2="127.3" class="p-skin" stroke-width="2.20"/>
+<line x1="394.1" y1="127.3" x2="34.0" y2="127.3" class="p-skin" stroke-width="2.20"/>
+<line x1="34.0" y1="127.3" x2="34.0" y2="26.0" class="p-web" stroke-width="3.52"/>
+<circle cx="34.0" cy="26.0" r="4.7" class="b-str"/>
+<circle cx="34.0" cy="127.3" r="4.7" class="b-str"/>
+<circle cx="154.0" cy="26.0" r="4.7" class="b-new"/>
+<circle cx="154.0" cy="127.3" r="4.7" class="b-new"/>
+<circle cx="274.1" cy="26.0" r="4.7" class="b-new"/>
+<circle cx="274.1" cy="127.3" r="4.7" class="b-new"/>
+<circle cx="394.1" cy="26.0" r="7.6" class="b-cap"/>
+<circle cx="394.1" cy="127.3" r="7.6" class="b-cap"/>
+<circle cx="467.3" cy="26.0" r="4.7" class="b-new"/>
+<circle cx="467.3" cy="166.7" r="4.7" class="b-new"/>
+<circle cx="540.4" cy="26.0" r="4.7" class="b-str"/>
+<circle cx="540.4" cy="206.1" r="4.7" class="b-str"/>
+</svg><figcaption><b>Redesign.</b> Three added stringer pairs cut the upper panels to 96 mm and 59 mm wide. Upper skin 2.0 mm, lower skin 1.0 mm, spar caps 800 mm².</figcaption></figure>
+    </div>
+    <div class="legend"><span><i style="background:var(--ink)"></i>Spar cap</span><span><i style="background:var(--ink-2)"></i>Original stringer</span><span><i style="background:var(--primer)"></i>Added stringer pair</span></div>
+    <figure><svg viewBox="0 0 560 230" role="img" aria-label="Margins of safety, baseline against redesign" class="ms-svg">
+<line x1="215.0" y1="18" x2="215.0" y2="196" class="grid"/>
+<text x="215.0" y="214" class="tick" text-anchor="middle">-1.0</text>
+<line x1="280.0" y1="18" x2="280.0" y2="196" class="grid"/>
+<text x="280.0" y="214" class="tick" text-anchor="middle">-0.5</text>
+<line x1="345.0" y1="18" x2="345.0" y2="196" class="grid0"/>
+<text x="345.0" y="214" class="tick" text-anchor="middle">0</text>
+<line x1="410.0" y1="18" x2="410.0" y2="196" class="grid"/>
+<text x="410.0" y="214" class="tick" text-anchor="middle">+0.5</text>
+<line x1="475.0" y1="18" x2="475.0" y2="196" class="grid"/>
+<text x="475.0" y="214" class="tick" text-anchor="middle">+1.0</text>
+<line x1="540.0" y1="18" x2="540.0" y2="196" class="grid"/>
+<text x="540.0" y="214" class="tick" text-anchor="middle">+1.5</text>
+<text x="205" y="48" class="lab" text-anchor="end">Bending</text>
+<rect x="345.0" y="30" width="169.5" height="16" class="bar-base"/>
+<text x="520.5" y="42" class="val" text-anchor="start">+1.30</text>
+<rect x="345.0" y="50" width="80.6" height="16" class="bar-new"/>
+<text x="431.6" y="62" class="val" text-anchor="start">+0.62</text>
+<text x="205" y="106" class="lab" text-anchor="end">Shear</text>
+<rect x="345.0" y="88" width="40.1" height="16" class="bar-base"/>
+<text x="391.1" y="100" class="val" text-anchor="start">+0.31</text>
+<rect x="345.0" y="108" width="21.3" height="16" class="bar-new"/>
+<text x="372.3" y="120" class="val" text-anchor="start">+0.16</text>
+<text x="205" y="164" class="lab" text-anchor="end">Upper-skin buckling</text>
+<rect x="230.7" y="146" width="114.3" height="16" class="bar-base bar-fail"/>
+<text x="224.7" y="158" class="val" text-anchor="end">-0.88</text>
+<rect x="345.0" y="166" width="18.9" height="16" class="bar-new"/>
+<text x="369.9" y="178" class="val" text-anchor="start">+0.15</text>
+</svg><figcaption><b>Margins of safety.</b> Grey is the baseline, green is the redesign. Every margin must sit right of zero.</figcaption></figure>
+  </div>
+
+  <div class="write">
+    <div>
+      <h3>My role</h3>
+      <p>This was an individual assignment, so I built the whole analysis as a spreadsheet tool. A stiffener-only idealisation gave the centroid and second moments of area. These were then refined into a boom model that included the effective panel areas. From that model I calculated the bending stresses, the closed-section shear flows and the compression buckling stress of the upper skin. Every stage was checked against independent force, moment and torque equilibrium. The baseline passed in bending and shear but failed in upper-skin buckling, with a margin of −0.88 on the 288 mm wide panel. Buckling stress scales with the square of thickness over width, so the redesign targeted panel width first. Three vertically aligned stringer pairs were added and the upper skin was thickened to 2.0 mm. The lower skin, spar caps and stringers were then reduced to lighter catalogue sizes while every margin stayed positive.</p>
+    </div>
+    <div>
+      <h3>What I learnt</h3>
+      <p>The lightest layout I found was not the one I selected. A 5.78 kg configuration kept every margin positive, but its shear margin was only 0.04. I chose the 5.90 kg layout instead, with a shear margin of 0.16. A margin that is barely positive on paper leaves no room for the assumptions behind the idealisation. This taught me that a design study is a trade between mass and robustness, rather than a search for the minimum. I also learnt to let the governing failure mode drive the design. Once buckling was identified as the critical case, most of the redesign followed from it.</p>
+    </div>
+  </div>
+  <div class="tools"><span>Boom idealisation</span><span>Closed-section shear flow</span><span>Plate buckling</span><span>Excel</span><span>Design trade study</span></div>
+</section>
+
+<!-- SHEET 3 -->
+<section class="sheet" id="wbtest">
+  <div class="titleblock">
+    <div class="tb-no"><span class="mono">Sheet</span><b>3</b><span class="mono">of 5</span></div>
+    <div class="tb-main">
+      <h2>Aluminium wing box: build and test to failure</h2>
+      <div class="tb-cells">
+        <div><span class="k">Course</span><span class="v">MIET2528 Introduction to Mechanical Engineering</span></div>
+        <div><span class="k">Date</span><span class="v">Semester 2, 2023</span></div>
+        <div><span class="k">Team</span><span class="v">Four students</span></div>
+        <div><span class="k">My role</span><span class="v">Lead fabricator, methodology, design selection</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="brief">
+    <p class="q">Design and build a wing box from 1 mm aluminium sheet that carries the highest load for the least weight. The skins were fixed at 250 mm × 100 mm and the height was free, with each beam bent from another sheet of the same size. The finished box was then tested to failure in three-point bending.</p>
+    <table class="spec">
+      <caption class="eyebrow">Prediction against test</caption>
+      <thead><tr><th>Quantity</th><th>Predicted</th><th>Tested</th></tr></thead>
+      <tbody>
+        <tr><td>Peak load</td><td class="n">4188 N</td><td class="n ok">5852 N</td></tr>
+        <tr><td>Load per gram</td><td class="n">12.2 N/g</td><td class="n ok">17.1 N/g</td></tr>
+        <tr><td>Mass</td><td class="n">334 g (CAD)</td><td class="n">342 g</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="figs hero test">
+    <figure>
+      <img src="img/wb-test-hero.jpg" alt="The riveted aluminium wing box after testing. The top skin has buckled into a crease across its full width at mid-span, and the open end shows triangular beams riveted between the two skins." width="1300" height="982">
+      <figcaption><b>Our box after the test.</b> The top skin buckled across its full width under the loading point, while the rivets held both skins to the beams.</figcaption>
+    </figure>
+    <div class="stack">
+      <figure>
+        <img src="img/wb-test-side.jpg" alt="Side view of the box, bent into a shallow V with a sharp crease in the top skin at mid-span." width="1400" height="411">
+        <figcaption><b>Side view.</b> The box folded about the loading point at mid-span.</figcaption>
+      </figure>
+      <figure>
+        <img src="img/wb-test-end.jpg" alt="End-on view showing three triangular beams riveted between the upper and lower skins, each with a small gap at its base." width="1400" height="616">
+        <figcaption><b>End view.</b> Three triangular (omega) beams riveted between the skins. The gap at each base is where the 90° hand brake could not finish the 109.5° bends.</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <div class="drawing">
+    <span class="eyebrow">Three-point bend test of the finished box, traced from the test machine's plot</span>
+    <figure><svg viewBox="0 0 560 250" role="img" aria-label="Load against displacement for the wing box test, peaking at 5852 N, with the 4188 N prediction marked" class="lp-svg">
+<line x1="58" y1="214.0" x2="540" y2="214.0" class="grid0"/>
+<text x="50" y="218.0" class="tick" text-anchor="end">0</text>
+<line x1="58" y1="186.3" x2="540" y2="186.3" class="grid"/>
+<text x="50" y="190.3" class="tick" text-anchor="end">1000</text>
+<line x1="58" y1="158.6" x2="540" y2="158.6" class="grid"/>
+<text x="50" y="162.6" class="tick" text-anchor="end">2000</text>
+<line x1="58" y1="130.9" x2="540" y2="130.9" class="grid"/>
+<text x="50" y="134.9" class="tick" text-anchor="end">3000</text>
+<line x1="58" y1="103.1" x2="540" y2="103.1" class="grid"/>
+<text x="50" y="107.1" class="tick" text-anchor="end">4000</text>
+<line x1="58" y1="75.4" x2="540" y2="75.4" class="grid"/>
+<text x="50" y="79.4" class="tick" text-anchor="end">5000</text>
+<line x1="58" y1="47.7" x2="540" y2="47.7" class="grid"/>
+<text x="50" y="51.7" class="tick" text-anchor="end">6000</text>
+<line x1="58" y1="20.0" x2="540" y2="20.0" class="grid"/>
+<text x="50" y="24.0" class="tick" text-anchor="end">7000</text>
+<text x="58.0" y="230" class="tick" text-anchor="middle">0</text>
+<text x="111.6" y="230" class="tick" text-anchor="middle">2</text>
+<text x="165.1" y="230" class="tick" text-anchor="middle">4</text>
+<text x="218.7" y="230" class="tick" text-anchor="middle">6</text>
+<text x="272.2" y="230" class="tick" text-anchor="middle">8</text>
+<text x="325.8" y="230" class="tick" text-anchor="middle">10</text>
+<text x="379.3" y="230" class="tick" text-anchor="middle">12</text>
+<text x="432.9" y="230" class="tick" text-anchor="middle">14</text>
+<text x="486.4" y="230" class="tick" text-anchor="middle">16</text>
+<text x="540.0" y="230" class="tick" text-anchor="middle">18</text>
+<text x="299" y="248" class="lab" text-anchor="middle">Displacement (mm)</text>
+<text x="14" y="117" class="lab" text-anchor="middle" transform="rotate(-90 14 117)">Load (N)</text>
+<line x1="58" y1="97.9" x2="540" y2="97.9" class="pred"/>
+<text x="536" y="112.9" class="val" text-anchor="end">Predicted 4188 N</text>
+<path d="M59.7,213.3 L63.2,211.5 L66.8,209.8 L70.3,207.9 L73.9,205.9 L77.5,203.7 L81.0,201.5 L84.6,198.8 L88.1,195.5 L91.7,192.2 L95.2,188.4 L98.8,184.5 L102.4,179.5 L105.9,174.1 L109.5,168.8 L113.0,163.5 L116.6,158.1 L120.1,152.8 L124.0,146.4 L127.6,142.2 L131.1,138.0 L134.7,134.2 L138.2,130.3 L141.8,126.2 L145.3,122.7 L148.9,119.3 L152.5,115.9 L156.0,112.9 L159.6,109.4 L163.1,105.4 L166.7,101.5 L170.3,97.8 L173.8,94.2 L177.4,90.6 L180.9,87.0 L184.5,83.1 L188.0,79.5 L191.6,76.3 L195.2,72.5 L198.7,68.9 L202.3,65.7 L205.8,63.2 L209.4,60.8 L213.0,59.2 L216.5,58.2 L220.1,57.4 L223.6,56.8 L227.2,56.3 L230.7,56.0 L234.3,55.4 L237.9,54.6 L241.4,53.5 L245.0,52.9 L248.5,52.5 L252.1,52.1 L255.6,51.8 L259.2,51.8 L262.8,51.8 L266.3,51.8 L269.9,51.8 L273.4,51.8 L277.0,51.9 L280.6,52.1 L284.1,52.4 L287.7,52.5 L291.2,52.6 L294.8,52.9 L298.3,53.2 L301.9,54.0 L305.5,54.6 L309.0,54.9 L312.6,55.4 L316.1,55.7 L319.7,56.3 L323.3,56.8 L326.8,57.4 L330.4,57.6 L333.9,58.2 L337.5,58.9 L341.0,59.6 L344.6,59.9 L348.2,60.4 L351.7,61.0 L355.3,61.3 L358.8,61.8 L362.4,62.4 L365.9,62.7 L369.5,63.2 L373.1,63.8 L376.6,64.0 L380.2,64.6 L383.7,65.0 L387.3,65.4 L390.9,66.0 L394.4,66.5 L398.0,66.8 L401.5,67.7 L405.1,68.2 L408.6,68.4 L413.1,68.9 L416.6,69.1 L420.2,69.6 L423.8,69.7 L427.3,70.3 L430.9,70.4 L434.4,71.0 L438.0,71.1 L441.6,71.6 L445.1,71.8 L448.7,71.8 L452.2,72.0 L455.8,72.4 L459.3,72.4 L462.9,72.5 L466.5,72.7 L470.0,72.9 L473.6,73.2 L477.1,73.2 L480.7,73.2 L484.3,73.8 L487.8,73.8 L491.4,74.1 L494.9,74.5 L498.5,74.8 L502.0,75.0 L505.6,75.5 L509.2,79.6 L512.7,79.6 L516.3,80.0 L519.8,80.3 L523.4,80.5" class="curve"/>
+<circle cx="255.6" cy="51.8" r="4" class="peak"/>
+<text x="255.6" y="41.8" class="val" text-anchor="middle">Tested 5852 N</text>
+</svg><figcaption><b>Load against displacement.</b> The box peaked at 5852 N, 40% above our hand calculation, and still carried more than 4800 N as it folded.</figcaption></figure>
+  </div>
+
+  <div class="write">
+    <div>
+      <h3>My role</h3>
+      <p>This was a group of four, and I did most of the physical manufacturing. That meant bending the beams on the sheet metal brake, closing them in a vice, then drilling and riveting them between the two skins. I also wrote the largest share of the report (33%), covering most of the methodology and the design optimisation. We first ran tensile tests on steel, aluminium and a polymer, and aluminium was chosen for its strength to weight ratio. Hat and omega beam profiles were then bent from sheet and compared in a three-point bend test. My optimisation section set out how the group narrowed four candidate layouts down to three cardboard prototypes, and then to the final design of three omega beams, one at each edge and one in the centre.</p>
+    </div>
+    <div>
+      <h3>What I learnt</h3>
+      <p>Our hand calculation predicted a failure load of 4188 N, while the box carried 5852 N, about 40% more. At the time we put the gap down to the generic 90 MPa yield stress we had used for aluminium and to the load possibly sitting off centre. However, the calculation only checked bending stress against yield. The box actually failed when the top skin buckled under the loading point, a mode the calculation did not model, as our report acknowledged. This was my first lesson that a stress check on its own is not a failure prediction, and it is why my later wing box study (Sheet 2) treats buckling as its own margin of safety. I also learnt how much manufacturing limits shape a design. The brake only bent to 90°, so the omega beams could never fully close, and the rivet layout was set from what the single-beam test showed.</p>
+    </div>
+  </div>
+  <div class="tools"><span>Tensile testing</span><span>Three-point bend testing</span><span>Sheet metal brake</span><span>Riveting</span><span>SOLIDWORKS</span><span>Beam theory</span></div>
+</section>
+
+<!-- SHEET 4 -->
+<section class="sheet" id="rib">
+  <div class="titleblock">
+    <div class="tb-no"><span class="mono">Sheet</span><b>4</b><span class="mono">of 5</span></div>
+    <div class="tb-main">
+      <h2>Wing rib finite element design</h2>
+      <div class="tb-cells">
+        <div><span class="k">Course</span><span class="v">MIET2578 Finite Element Analysis</span></div>
+        <div><span class="k">Date</span><span class="v">Semester 2, 2026</span></div>
+        <div><span class="k">Team</span><span class="v">Three students; the rib was mine</span></div>
+        <div><span class="k">Software</span><span class="v">ANSYS Workbench, SpaceClaim</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="brief">
+    <p class="q">Modify a supplied aluminium wing rib so that it deflects no more than 0.10 mm under load, weighs no more than 50 g and keeps a safety factor of at least 5.0.</p>
+    <table class="spec">
+      <caption class="eyebrow">Targets against final design</caption>
+      <thead><tr><th>Requirement</th><th>Target</th><th>Baseline</th><th>Final</th></tr></thead>
+      <tbody>
+        <tr><td>Max. deformation</td><td class="n">≤ 0.10 mm</td><td class="n bad">0.311 mm</td><td class="n ok">0.0922 mm</td></tr>
+        <tr><td>Mass</td><td class="n">≤ 50 g</td><td class="n">29.7 g</td><td class="n ok">21.83 g</td></tr>
+        <tr><td>Min. safety factor</td><td class="n">≥ 5.0</td><td class="n">6.2</td><td class="n ok">9.48</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="figs">
+    <figure>
+      <img src="img/rib-final.jpg" alt="ANSYS contour plots of the final rib: total deformation peaking at the trailing edge tip, and equivalent stress with a mild peak in the thin web." width="945" height="382">
+      <figcaption><b>Final rib at a 0.5 mm mesh.</b> (a) Total deformation, 0.0919 mm at the trailing edge tip. (b) Equivalent stress, 25.3 MPa peak in the 1.0 mm web.</figcaption>
+    </figure>
+    <div class="figs two">
+      <figure>
+        <img src="img/rib-zones.jpg" alt="Rib outline coloured by thickness zone: thin grey web, blue 4 mm rim at the front, orange 8 mm and red 18 mm rim towards the trailing edge, with support edges A to D." width="700" height="165">
+        <figcaption><b>Final geometry by thickness.</b> 1.0 mm web (grey) inside a rim of 4.0 mm (blue), 8.0 mm (orange) and 18.0 mm (red).</figcaption>
+      </figure>
+      <figure>
+        <img src="img/rib-development.jpg" alt="Two ANSYS plots: deformation of the supplied flat rib, and stress in a rejected version with seven lightening holes." width="1134" height="456">
+        <figcaption><b>Rejected routes.</b> (a) Supplied 4.0 mm plate, 0.311 mm deflection. (b) Lightening holes, with stress moving onto a thin ligament.</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <div class="write">
+    <div>
+      <h3>My role</h3>
+      <p>Our group of three split the assessment between a lateral spar and a wing rib, and the rib was mine. I modelled it in ANSYS Workbench as a two-dimensional plane stress problem. A mesh study was run at 4, 2, 1 and 0.5 mm, and deformation converged with a grid convergence index of 0.25 %. The supplied 4.0 mm plate met the mass and strength targets but deflected 0.311 mm, three times the limit. The rib was a stiffness problem. Two obvious fixes were tested and rejected. A uniform 6.72 mm plate used the whole 50 g budget and still deflected 0.184 mm. Seven lightening holes saved 3.57 g but made the rib slightly less stiff. The final design treats the tail as a tapered beam, with a 1.0 mm web inside a rim that thickens from 4.0 to 8.0 to 18.0 mm towards the trailing edge. This raised the second moment of area at the rear spar from 449 to 1534 mm⁴. Narrowing the lightly stressed forward rim then saved a further 1.83 g.</p>
+    </div>
+    <div>
+      <h3>What I learnt</h3>
+      <p>Adding material is the least efficient way to add stiffness. The rib only met its deflection limit once the material was moved to where it carries bending, which is why aircraft ribs are built as caps and a thin web. The final design is 26.6 % lighter than the supplied plate and 3.4 times stiffer. I also learnt to separate physical stress peaks from numerical ones. Deformation changed by less than 0.4 % between meshes. However, the peak at the end of each support kept rising with every refinement, so it could not be treated as a real stress. The safety factor of 9.48 is based on the 25.3 MPa peak instead, which sits on a genuine shear band in the web.</p>
+    </div>
+  </div>
+  <div class="tools"><span>ANSYS Mechanical</span><span>2D plane stress</span><span>Mesh convergence (GCI)</span><span>Hand calculations</span><span>Design iteration</span></div>
+</section>
+
+<!-- SHEET 5 -->
+<section class="sheet" id="schlieren">
+  <div class="titleblock">
+    <div class="tb-no"><span class="mono">Sheet</span><b>5</b><span class="mono">of 5</span></div>
+    <div class="tb-main">
+      <h2>Supersonic schlieren visualisation</h2>
+      <div class="tb-cells">
+        <div><span class="k">Course</span><span class="v">AERO3349 Computational and High-Speed Aerodynamics</span></div>
+        <div><span class="k">Date</span><span class="v">Semester 1, 2026</span></div>
+        <div><span class="k">Team</span><span class="v">Six students</span></div>
+        <div><span class="k">My role</span><span class="v">Cone shock analysis</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="brief">
+    <p class="q">Visualise the shock and expansion waves around a sphere, a rod and a cone in a miniature supersonic wind tunnel, then use the images to estimate the flow conditions.</p>
+    <table class="spec">
+      <caption class="eyebrow">Cone case results</caption>
+      <thead><tr><th>Quantity</th><th>Method</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>Cone semi-vertex angle</td><td>Measured from image</td><td class="n">22.8°</td></tr>
+        <tr><td>Shock-wave angle</td><td>Measured from image</td><td class="n">53°</td></tr>
+        <tr><td>Freestream Mach number</td><td>Conical flow chart</td><td class="n">1.48</td></tr>
+        <tr><td>Nozzle throat area</td><td>Area-Mach relation</td><td class="n">45.17 mm²</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="figs narrow-left">
+    <figure>
+      <img src="img/ssl-cone-angles.jpg" alt="Schlieren image of the cone with the semi-vertex and shock angles marked in green." width="391" height="806">
+      <figcaption><b>Angles measured on the cone image.</b></figcaption>
+    </figure>
+    <div class="figs">
+      <figure>
+        <img src="img/ssl-cone.jpg" alt="Schlieren image of a cone in supersonic flow, with an attached conical shock at the tip." width="1380" height="776">
+        <figcaption><b>Cone.</b> An attached conical shock at the tip.</figcaption>
+      </figure>
+      <figure>
+        <img src="img/ssl-sphere.jpg" alt="Schlieren image of a sphere on a sting, with a detached bow shock standing ahead of it." width="685" height="536">
+        <figcaption><b>Sphere.</b> A detached bow shock stands off the blunt body.</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <div class="write">
+    <div>
+      <h3>My role</h3>
+      <p>Schlieren imaging shows density gradients in the flow without placing a probe in it. This matters at supersonic speeds, because any probe generates shocks of its own. While the group shared the testing, I analysed the cone case. The semi-vertex angle and the shock-wave angle were measured from the schlieren image as 22.8° and 53°. On the conical flow chart, the two angles intersected between the Mach 1.45 and 1.50 lines. Interpolation gave a freestream Mach number of 1.48. I then used the area-Mach relation, with γ = 1.405 and the 52.5 mm² nozzle exit area, to back-calculate the throat area as 45.17 mm².</p>
+    </div>
+    <div>
+      <h3>What I learnt</h3>
+      <p>This lab connected compressible flow theory to something I could see. The bow shock standing off the sphere and the attached shock on the cone matched what the theory predicts for blunt and sharp bodies. It also showed how much an optical method depends on careful reading. The Mach number came from two angles measured by hand and an interpolation between chart lines. A small misreading of either angle moves the result significantly. Overall, I now treat any value read from an image as a measurement with its own uncertainty.</p>
+    </div>
+  </div>
+  <div class="tools"><span>Schlieren imaging</span><span>Oblique and conical shocks</span><span>Isentropic flow</span><span>Supersonic wind tunnel</span></div>
+</section>
+
+<footer>
+  <span>Luka Uzelac · RMIT University · lukabrankouzelac@gmail.com</span>
+  <span>Open to internships and graduate roles in aerodynamics, flight test and systems engineering.</span>
+</footer>
+</div>
+</body>
+</html>
